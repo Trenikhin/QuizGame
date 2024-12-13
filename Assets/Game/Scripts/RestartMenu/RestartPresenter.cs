@@ -2,24 +2,25 @@
 {
 	using System;
 	using Core;
+	using Scripts.Configs;
 	using Zenject;
 
 	public class RestartPresenter : IInitializable, IDisposable
 	{
 		[Inject] IRestartView _view;
-		[Inject] ILevelManager _levelManager;
 		[Inject] ILoadScreen _loadScreen;
+		[Inject] ILevel _level;
 		
 		public void Initialize()
 		{
+			_level.LastLevelCompleted += OnGameFinished;
 			_view.OnRestartClicked += OnRestartClicked;
-			_levelManager.GameFinished += OnGameFinished;
 		}
 
 		public void Dispose()
 		{
+			_level.LastLevelCompleted -= OnGameFinished;
 			_view.OnRestartClicked -= OnRestartClicked;
-			_levelManager.GameFinished -= OnGameFinished;
 		}
 		
 		void OnGameFinished()

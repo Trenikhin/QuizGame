@@ -17,7 +17,7 @@
 		[SerializeField] Image _image;
 		[SerializeField] float _fadeDuration = 0.5f;	
 		
-		[Inject] ILevelManager _levelManager;
+		[Inject] IGameLauncher m_GameLauncher;
 		
 		public void Load()
 		{
@@ -27,7 +27,7 @@
 
 		IEnumerator LoadLevelRoutine()
 		{
-			_levelManager.Reset();
+			m_GameLauncher.Reset();
 			DoFade( 0, 1, _fadeDuration);
 			
 			yield return new WaitForSeconds(0.5f);

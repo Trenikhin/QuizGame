@@ -14,7 +14,7 @@
 		[Inject] IQuizBoardView _view;
 		[Inject] IGridPlacer _gridPlacer;
 		[Inject] IQuizBrain _brain;
-		[Inject] ILevelManager _levelManager;
+		[Inject] LevelsConfig _levels;
 		
 		List<IQuizCardView> _cards = new List<IQuizCardView>();
 		
@@ -31,7 +31,7 @@
 		
 		void DrawBoard(LevelConfig lvlCfg)
 		{
-			bool withAnimation = _levelManager.FirstLevel.Identifier == lvlCfg.Identifier;
+			bool withAnimation = _levels.FirstLevel.Identifier == lvlCfg.Identifier;
 			
 			ClearBoard();
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );

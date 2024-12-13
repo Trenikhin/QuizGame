@@ -9,8 +9,8 @@
 
 	public class LevelInstaller : MonoInstaller
 	{
-		[SerializeField] LevelConfig[] _levelsConfig;
 		[SerializeField] QuizCardView _cardTemplate;
+		[SerializeField] LevelsConfig _levels;
 		
 		public override void InstallBindings()
 		{
@@ -40,14 +40,14 @@
 			
 			Container.BindInstance(_cardTemplate);
 			
-			Container.BindInstance(_levelsConfig).AsSingle();
+			Container.BindInstance(_levels).AsSingle();
 			
 			Container
-				.BindInterfacesTo<LevelManager>()
+				.BindInterfacesTo<GameLauncher>()
 				.AsSingle();
 			
 			Container
-				.BindInterfacesTo<CardEvents>()
+				.BindInterfacesTo<PickHelper>()
 				.AsSingle();
 			
 			Container
