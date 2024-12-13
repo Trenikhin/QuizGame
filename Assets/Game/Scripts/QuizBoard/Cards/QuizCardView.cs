@@ -2,6 +2,8 @@
 {
 	using System;
 	using DG.Tweening;
+	using DG.Tweening.Core;
+	using DG.Tweening.Plugins.Options;
 	using Scripts.Configs;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
@@ -12,7 +14,9 @@
 		event Action OnCardClicked;
 
 		Transform Transform { get; }
-		
+
+		void Animate();
+		void SetActive(bool active);
 		void SetIcon(Sprite sprite);
 		void Shake();
 		void ShowParticles(Action callback);
@@ -24,10 +28,11 @@
 		[SerializeField] Collider2D _collider;
 		
 		[Inject] IStarParticle _particles;
-
+		
 		Tween _shakeTween;
 		int _baseOrder;
-		
+		Tween _showCardTween;
+
 		public event Action OnCardClicked;
 		
 		public Transform Transform => transform;
@@ -39,6 +44,21 @@
 
 		void Start() => _baseOrder = _icon.sortingOrder;
 		
+		public void SetActive(bool active) => gameObject.SetActive(active);
+
+		public void Animate()
+		{
+			_showCardTween = transform
+				.DOScale( 1, 0.22f )
+				.SetEase(Ease.OutBounce)
+				.From(0);
+		}
+		
+		public void SetChild(Transform parent)
+		{
+			transform.parent = parent;
+		}
+
 		public void SetIcon( Sprite sprite )
 		{
 			_icon.sprite = sprite;
@@ -78,7 +98,5 @@
 				callback?.Invoke();
 			});
 		}
-
-		public class Factory : PlaceholderFactory<CardConfig, Vector3, IQuizCardView> {}
 	}
 }

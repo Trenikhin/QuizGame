@@ -25,7 +25,6 @@
 				.AsSingle();
 			
 			Container.BindInstance(_spriteRenderer);
-			Container.BindInstance(_cardHolder);
 			
 			Container
 				.BindInterfacesTo<Coords>()
@@ -75,10 +74,14 @@
 				.BindInterfacesTo<QuizBrain>()
 				.AsSingle();
 			
-			// Bind card factory
-			Container
-				.BindFactory< CardConfig, Vector3, IQuizCardView, QuizCardView.Factory>()
-				.FromFactory< CardFactory >();
+			Container.BindFactory<CardConfig, Vector3, QuizCardPresenter, QuizCardPresenter.Factory>()
+				.FromPoolableMemoryPool( pool => pool
+					.WithInitialSize(10)
+					.FromSubContainerResolve()
+					.ByNewContextPrefab( _cardTemplate )
+					.WithGameObjectName( "Card" )
+					.UnderTransform( _cardHolder )
+				);
 			
 			Container
 				.BindInterfacesTo<Level>()

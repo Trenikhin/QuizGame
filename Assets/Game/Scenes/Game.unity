@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 528944123}
   - component: {fileID: 528944122}
   m_Layer: 0
-  m_Name: Quiz Card Holder
+  m_Name: Quiz Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

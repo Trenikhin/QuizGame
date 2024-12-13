@@ -3,6 +3,7 @@
 	using System.Collections;
 	using Core;
 	using DG.Tweening;
+	using Tweener;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Zenject;
@@ -17,6 +18,7 @@
 		[SerializeField] Image _image;
 		[SerializeField] float _fadeDuration = 0.5f;	
 		
+		[Inject] IFadeAnimator _fadeAnimator;
 		[Inject] IGameLauncher _gameLauncher;
 		
 		public void Load()
@@ -27,21 +29,14 @@
 
 		IEnumerator LoadLevelRoutine()
 		{
-			DoFade( 0, 1, _fadeDuration);
+			_fadeAnimator.DoFade( _image, 0, 1, _fadeDuration );
 			
 			yield return new WaitForSeconds(1f);
-			DoFade(1, 0, _fadeDuration);
+			_fadeAnimator.DoFade( _image, 1, 0, _fadeDuration );
 			
 			yield return new WaitForSeconds(_fadeDuration);
 			gameObject.SetActive( false );
 			_gameLauncher.Launch();
-		}
-
-		void DoFade( float from, float to, float duration )
-		{
-			DOVirtual
-				.Float(from, to, duration, (v) => _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, v))
-				.SetEase(Ease.Linear);
 		}
 	}
 }

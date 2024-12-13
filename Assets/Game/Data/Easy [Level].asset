@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0396dbfecaf94fb890fbcff6fdd53069, type: 3}
-  m_Name: Medium
+  m_Name: Easy [Level]
   m_EditorClassIdentifier: 
-  <Identifier>k__BackingField: 3
+  <Identifier>k__BackingField: 1
   <Bundles>k__BackingField:
-  - {fileID: 11400000, guid: 4d9ac705ad6a56841944657795b9995d, type: 2}
-  - {fileID: 11400000, guid: 45ebcd3ef0099714da233a8a5054fba3, type: 2}
+  - {fileID: 11400000, guid: 2e69147dd57bf204ab95717b24ab6499, type: 2}

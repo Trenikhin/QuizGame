@@ -11,12 +11,14 @@
 	public class QuizBoardPresenter : IInitializable, IDisposable
 	{
 		[Inject] IQuizBoardView _view;
+		
 		[Inject] ILevel _level;
 		[Inject] ICoords  _coords;
 		[Inject] IQuizBrain _brain;
 		[Inject] LevelsConfig _levels;
+		[Inject] QuizCardPresenter.Factory _factory;
 		
-		List<IQuizCardView> _cards = new List<IQuizCardView>();
+		List<QuizCardPresenter> _cards = new List<QuizCardPresenter>();
 		
 		public void Initialize()
 		{
@@ -33,11 +35,15 @@
 		
 		void DrawLevel(LevelConfig lvlCfg)
 		{
-			bool withAnimation = _levels.FirstLevel.Identifier == lvlCfg.Identifier;
-			
+			// Clear Board
 			ClearLevel();
+			
+			// Set Text
+			bool withAnimation = _levels.FirstLevel.Identifier == lvlCfg.Identifier;
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
 
+			// Create Cards
+			
 			var board = _brain.GetBoard(lvlCfg);
 			var width = board.GetLength(0);
 			var height = board.GetLength(1);
@@ -47,17 +53,20 @@
 				for (var j = 0; j < height; j++)
 				{
 					var pos = _coords.GridToWorld(new Vector2Int(j, i), height, width);
-					var cardView = _view.CreateCard(board[i, j], pos, withAnimation);
-					_cards.Add( cardView );
+					var card = _factory.Create(board[i, j], pos);
+					_cards.Add( card );
 				}
 			}
 		}
 
 		void ClearLevel()
 		{
+			// Clear Text
 			_view.SetGoal("", false);
+			
+			// Clear Cards
 			foreach (var c in _cards)
-				Object.Destroy( c.Transform.gameObject );
+				c.Dispose();
 			_cards.Clear();
 		}
 	}
