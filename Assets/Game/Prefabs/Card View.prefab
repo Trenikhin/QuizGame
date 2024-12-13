@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 7721765701426068993}
+  _collider: {fileID: 7721765701216876995}
 --- !u!114 &7441909488230846884
 MonoBehaviour:
   m_ObjectHideFlags: 0

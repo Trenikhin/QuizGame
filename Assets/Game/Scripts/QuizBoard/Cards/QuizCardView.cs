@@ -21,17 +21,22 @@
 	public class QuizCardView : MonoBehaviour, IQuizCardView, IPointerClickHandler
 	{
 		[SerializeField] SpriteRenderer _icon;
+		[SerializeField] Collider2D _collider;
 		
 		[Inject] IStarParticle _particles;
 
 		Tween _shakeTween;
 		int _baseOrder;
+		bool _isInteractable;
 		
 		public event Action OnCardClicked;
 		
 		public Transform Transform => transform;
 
-		public void OnPointerClick(PointerEventData eventData) => OnCardClicked?.Invoke();
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			OnCardClicked?.Invoke();
+		}
 
 		void Start() => _baseOrder = _icon.sortingOrder;
 		
@@ -53,6 +58,7 @@
 		public void ShowParticles( Action callback )
 		{
 			_icon.sortingOrder += 1;
+			_collider.enabled = false;
 			
 			// Bounce
 			transform.localScale = Vector3.one;
@@ -68,6 +74,7 @@
 
 			_particles.Show( transform.position, () =>
 			{
+				_collider.enabled = true;
 				_icon.sortingOrder = _baseOrder;	 
 				callback?.Invoke();
 			});
