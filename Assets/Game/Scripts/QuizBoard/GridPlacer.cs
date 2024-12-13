@@ -29,6 +29,7 @@
 					float yPosition = startPosition.y - row * (spriteHeight + _spacing);
 					
 					cells[row, col].transform.position = new Vector3(xPosition, yPosition, 0);
+					cells[row, col].transform.SetParent(transform);
 				}
 			}
 		}

@@ -800,11 +800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2e9c11b7a74960a52119aa32010506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelsConfig:
-  - {fileID: 11400000, guid: 33b2e0e9e82d2ff4bbbfdf4ea9da6f26, type: 2}
-  - {fileID: 11400000, guid: 96d574542c56cee418eb5aa02efd3071, type: 2}
-  - {fileID: 11400000, guid: 7fac50d908926dd40a2fe1394df589bf, type: 2}
   _cardTemplate: {fileID: 7721765701216876992, guid: 8f78b7f406274c146b09392671496fec, type: 3}
+  _levels: {fileID: 11400000, guid: fea50856a6886794893648bd6c43c4fb, type: 2}
 --- !u!4 &1294988170
 Transform:
   m_ObjectHideFlags: 0
