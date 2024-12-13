@@ -1,12 +1,10 @@
 ﻿namespace Game.QuizBoard
 {
 	using System;
-	using System.Collections;
 	using DG.Tweening;
 	using Scripts.Configs;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
-	using UnityEngine.UI;
 	using Zenject;
 
 	public interface IQuizCardView
@@ -23,7 +21,7 @@
 	public class QuizCardView : MonoBehaviour, IQuizCardView, IPointerClickHandler
 	{
 		[SerializeField] SpriteRenderer _icon;
-
+		
 		[Inject] IStarParticle _particles;
 
 		Tween _shakeTween;
@@ -74,7 +72,7 @@
 				callback?.Invoke();
 			});
 		}
-		
+
 		public class Factory : PlaceholderFactory<CardConfig ,IQuizCardView> {}
 	}
 }

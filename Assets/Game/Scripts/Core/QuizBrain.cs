@@ -9,6 +9,7 @@
 	public interface IQuizBrain
 	{
 		void GenerateGoals( LevelConfig[] levels );
+		CardConfig[,] GetBoard(LevelConfig lvl);
 		CardConfig GetGoal( LevelConfig levelConfig );
 	}
 	
@@ -16,6 +17,23 @@
 	{
 		Dictionary< string, CardConfig > _cachedGoals = new Dictionary< string, CardConfig>();
 
+		public CardConfig[,] GetBoard(LevelConfig lvl)
+		{
+			CardConfig[,] cards = new CardConfig[lvl.Bundles.Length, lvl.Bundles[0].Cards.Length];
+			
+			for (int i = 0; i < lvl.Bundles.Length; i++)
+			{
+				for (int j = 0; j < lvl.Bundles[i].Cards.Length; j++)
+				{
+					var card = lvl.Bundles[i].Cards[j];
+					
+					cards[i, j] = card;
+				}
+			}
+
+			return cards;
+		}
+		
 		public void GenerateGoals( LevelConfig[] levels )
 		{
 			_cachedGoals.Clear();

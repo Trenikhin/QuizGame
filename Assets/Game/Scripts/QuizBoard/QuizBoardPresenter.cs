@@ -12,7 +12,7 @@
 	{
 		[Inject] ILevel _level;
 		[Inject] IQuizBoardView _view;
-		[Inject] IGridPlacer _gridPlacer;
+		[Inject] ICoords  _coords;
 		[Inject] IQuizBrain _brain;
 		[Inject] LevelsConfig _levels;
 		
@@ -36,20 +36,18 @@
 			ClearBoard();
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
 
-			Transform[,] cards = new Transform[lvlCfg.Bundles.Length, lvlCfg.Bundles[0].Cards.Length];
+			var board = _brain.GetBoard(lvlCfg);
+			var width = board.GetLength(0);
+			var height = board.GetLength(1);
 			
-			for (int i = 0; i < lvlCfg.Bundles.Length; i++)
+			for (var i = 0; i < width; i++)
 			{
-				for (int j = 0; j < lvlCfg.Bundles[i].Cards.Length; j++)
+				for (var j = 0; j < height; j++)
 				{
-					var cardCfg = lvlCfg.Bundles[i].Cards[j];
-					var card = CreateCard(cardCfg, withAnimation );
-					
-					cards[i, j] = card.Transform;
+					var card = CreateCard(board[i, j], withAnimation );
+					card.Transform.position = _coords.GridToWorld(new Vector2Int(j, i), height, width);
 				}
 			}
-			
-			_gridPlacer.Place( cards );
 		}
 		
 		IQuizCardView CreateCard(CardConfig cardCfg, bool animate)

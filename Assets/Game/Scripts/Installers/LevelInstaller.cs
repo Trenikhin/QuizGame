@@ -11,12 +11,16 @@
 	{
 		[SerializeField] QuizCardView _cardTemplate;
 		[SerializeField] LevelsConfig _levels;
+		[SerializeField] Transform _cardHolder;
+		[SerializeField] SpriteRenderer _spriteRenderer;
 		
 		public override void InstallBindings()
 		{
+			Container.BindInstance(_spriteRenderer);
+			Container.BindInstance(_cardHolder);
+			
 			Container
-				.BindInterfacesTo<GridPlacer>()
-				.FromComponentInHierarchy()
+				.BindInterfacesTo<Coords>()
 				.AsSingle();
 			
 			Container

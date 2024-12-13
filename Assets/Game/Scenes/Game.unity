@@ -433,28 +433,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528944123}
-  - component: {fileID: 528944122}
   m_Layer: 0
-  m_Name: CardPlacer
+  m_Name: CardHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &528944122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528944121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0e57dec7da429594e3842f8b0f4458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cell: {fileID: 7721765701216876989, guid: 8f78b7f406274c146b09392671496fec, type: 3}
-  _spacing: 0
 --- !u!4 &528944123
 Transform:
   m_ObjectHideFlags: 0
@@ -802,6 +787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardTemplate: {fileID: 7721765701216876992, guid: 8f78b7f406274c146b09392671496fec, type: 3}
   _levels: {fileID: 11400000, guid: fea50856a6886794893648bd6c43c4fb, type: 2}
+  _cardHolder: {fileID: 528944123}
+  _spriteRenderer: {fileID: 7721765701216876989, guid: 8f78b7f406274c146b09392671496fec, type: 3}
 --- !u!4 &1294988170
 Transform:
   m_ObjectHideFlags: 0
