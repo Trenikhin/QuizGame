@@ -29,7 +29,7 @@
 		{
 			DoFade( 0, 1, _fadeDuration);
 			
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1f);
 			DoFade(1, 0, _fadeDuration);
 			
 			yield return new WaitForSeconds(_fadeDuration);
