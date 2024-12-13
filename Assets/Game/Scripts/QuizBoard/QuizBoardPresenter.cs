@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using Core;
-	using Scripts._SandBox;
 	using Scripts.Configs;
 	using UnityEngine;
 	using Zenject;
