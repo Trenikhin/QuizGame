@@ -4,7 +4,6 @@
 	using Zenject;
 	using Game.Core;
 	using Scripts.Configs;
-	using UnityEngine;
 
 	public class QuizCardPresenter : IInitializable, IDisposable
 	{
@@ -15,6 +14,7 @@
 		public void Initialize()
 		{
 			_view.OnCardClicked += OnCardClicked;
+			_view.SetIcon( _cfg.Icon );
 		}
 
 		public void Dispose()

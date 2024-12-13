@@ -46,19 +46,11 @@
 			{
 				for (var j = 0; j < height; j++)
 				{
-					var card = CreateCard(board[i, j], withAnimation );
-					card.Transform.position = _coords.GridToWorld(new Vector2Int(j, i), height, width);
+					var cardView = _view.CreateCard(board[i, j], withAnimation);
+					cardView.Transform.position = _coords.GridToWorld(new Vector2Int(j, i), height, width);
+					_cards.Add( cardView );
 				}
 			}
-		}
-		
-		IQuizCardView CreateCard(CardConfig cardCfg, bool animate)
-		{
-			var cardView = _view.CreateCard(cardCfg, animate);
-			cardView.SetIcon( cardCfg.Icon );
-			_cards.Add( cardView );
-
-			return cardView;
 		}
 
 		void ClearBoard()

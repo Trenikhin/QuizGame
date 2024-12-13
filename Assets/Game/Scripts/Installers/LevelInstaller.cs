@@ -14,6 +14,9 @@
 		[SerializeField] Transform _cardHolder;
 		[SerializeField] SpriteRenderer _spriteRenderer;
 		
+		/// <summary>
+		/// Можно разделить на несколько инсталлеров, но решил не усложнять
+		/// </summary>
 		public override void InstallBindings()
 		{
 			Container.BindInstance(_spriteRenderer);
