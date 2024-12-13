@@ -26,6 +26,8 @@
 		[SerializeField] SpriteRenderer _icon;
 
 		[Inject] IStarParticle _particles;
+
+		Tween _shakeTween;
 		
 		public event Action OnCardClicked;
 		
@@ -42,7 +44,8 @@
 		{
 			Vector3 strength = transform.localScale.x * 0.2f * Vector3.right;
 			
-			transform
+			_shakeTween?.Kill();
+			_shakeTween = transform
 				.DOShakePosition( 0.1f, strength, 30 )
 				.SetLink( transform.gameObject );
 		}
