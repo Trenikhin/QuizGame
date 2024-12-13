@@ -35,8 +35,7 @@
 				.WaitForCompletion();
 
 			// Fly
-			_particle.transform.DOScale(0, 0.3f).From(0);
-			
+			_particle.transform.DOScale(0, 0.3f).From(1);
 			yield return _particle.transform
 				.DOMove( _moveTarget.position, 0.3f )
 				.WaitForCompletion();
