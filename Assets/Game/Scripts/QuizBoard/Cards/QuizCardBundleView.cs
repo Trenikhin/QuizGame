@@ -2,8 +2,5 @@
 {
 	using UnityEngine;
 
-	public class QuizCardBundleView : MonoBehaviour
-	{
-		
-	}
+	public class QuizCardBundleView : MonoBehaviour { }
 }

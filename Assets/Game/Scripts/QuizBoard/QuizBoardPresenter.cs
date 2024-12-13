@@ -13,31 +13,28 @@
 		[Inject] ILevel _level;
 		[Inject] IQuizBoardView _view;
 		[Inject] IQuizBrain _brain;
+		[Inject] ILevelManager _levelManager;
 		
 		List<IQuizCardView> _cards = new List<IQuizCardView>();
 		List<QuizCardBundleView> _bundles = new List<QuizCardBundleView>();
 		
 		public void Initialize()
 		{
-			OnLevelChanged(_level.Value);
-			_level.OnChanged += OnLevelChanged;
+			ShowBoard(_level.Value);
+			_level.OnChanged += ShowBoard;
 		}
 		
 		public void Dispose()
 		{
-			_level.OnChanged -= OnLevelChanged;
+			_level.OnChanged -= ShowBoard;
 		}
 		
-		void OnLevelChanged(LevelConfig lvlCfg)
+		void ShowBoard(LevelConfig lvlCfg)
 		{
-			foreach (var c in _cards)
-				GameObject.Destroy( c.Transform.gameObject );
-			_cards.Clear();
-			foreach (var b in _bundles)
-				GameObject.Destroy( b.gameObject );
-			_bundles.Clear();
+			bool withAnimation = _levelManager.FirstLevel.Identifier == lvlCfg.Identifier;
 			
-			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}" );
+			ClearBoard();
+			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
 			
 			foreach (var bundleCfg in lvlCfg.Bundles)
 			{
@@ -46,17 +43,27 @@
 				
 				foreach (var cardCfg in bundleCfg.Cards)
 				{
-					CreateCard(cardCfg, bundleView);
+					CreateCard(cardCfg, bundleView, withAnimation );
 				}
 			}
 		}
 		
-		void CreateCard(CardConfig cardCfg, QuizCardBundleView bundleView)
+		void CreateCard(CardConfig cardCfg, QuizCardBundleView bundleView, bool animate)
 		{
-			var cardView = _view.GetCard(cardCfg);
+			var cardView = _view.CreateCard(cardCfg, animate);
 			cardView.SetIcon( cardCfg.Icon );
 			cardView.Transform.SetParent(bundleView.transform);
 			_cards.Add( cardView );
+		}
+
+		void ClearBoard()
+		{
+			foreach (var c in _cards)
+				GameObject.Destroy( c.Transform.gameObject );
+			_cards.Clear();
+			foreach (var b in _bundles)
+				GameObject.Destroy( b.gameObject );
+			_bundles.Clear();
 		}
 	}
 }

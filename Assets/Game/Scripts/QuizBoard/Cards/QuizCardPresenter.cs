@@ -11,6 +11,8 @@
 		[Inject] IQuizCardView _view;
 		[Inject] ICardEvents _cardEvents;
 		[Inject] CardConfig _cfg;
+		[Inject] IQuizBrain _brain;
+		[Inject] ILevel _level;
 		
 		public void Initialize()
 		{
@@ -24,7 +26,14 @@
 
 		void OnCardClicked()
 		{
-			_cardEvents.PickCard( _cfg );
+			if (_cfg.Identifier == _brain.GetGoal(_level.Value).Identifier)
+			{
+				_view.ShowParticles( () => _cardEvents.PickCard( _cfg ) );
+			}
+			else
+			{
+				_view.Shake();
+			}
 		}
 	}
 }

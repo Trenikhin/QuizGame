@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79f59b4f6e14d988d905a441ab83d3c, type: 3}
-  m_Name: PrefabsConfig
+  m_Script: {fileID: 11500000, guid: 0396dbfecaf94fb890fbcff6fdd53069, type: 3}
+  m_Name: Easy
   m_EditorClassIdentifier: 
-  <CardTemplate>k__BackingField: {fileID: 245238024462209205, guid: ce025f30c84bf2449855e7fb2adb14e0, type: 3}
+  <Identifier>k__BackingField: 1
+  <Bundles>k__BackingField:
+  - {fileID: 11400000, guid: 2e69147dd57bf204ab95717b24ab6499, type: 2}

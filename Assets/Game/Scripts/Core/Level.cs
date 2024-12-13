@@ -2,6 +2,7 @@
 { 
 	using System;
 	using Scripts.Configs;
+	using UnityEngine;
 	using Zenject;
 
 	public interface ILevel
@@ -36,8 +37,8 @@
 				return false;
 			
 			Value = _levels[_cur];
-			_cur++;
 			OnChanged?.Invoke(Value);
+			_cur++;
 			
 			return true;
 		}

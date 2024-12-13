@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe435e896cd475db714ad7e37ea5aee, type: 3}
+  m_Name: Bundle 6
+  m_EditorClassIdentifier: 
+  <Cards>k__BackingField:
+  - <Identifier>k__BackingField: One
+    <Icon>k__BackingField: {fileID: 1422184923334757970, guid: 995b56be8ee03874c89b4fe6d4fd4a36, type: 3}
+  - <Identifier>k__BackingField: Two
+    <Icon>k__BackingField: {fileID: 1808195818850983521, guid: 995b56be8ee03874c89b4fe6d4fd4a36, type: 3}
+  - <Identifier>k__BackingField: Three
+    <Icon>k__BackingField: {fileID: -7900951133411543555, guid: 995b56be8ee03874c89b4fe6d4fd4a36, type: 3}

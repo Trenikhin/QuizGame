@@ -3,22 +3,42 @@
 	using Core;
 	using QuizBoard;
 	using Scripts.Configs;
+	using Ui;
 	using UnityEngine;
 	using Zenject;
 
 	public class LevelInstaller : MonoInstaller
 	{
 		[SerializeField] LevelConfig[] _levelsConfig;
-		[SerializeField] PrefabsConfig _prefabsConfig;
+		[SerializeField] QuizCardView _cardTemplate;
 		
 		public override void InstallBindings()
 		{
-			Container.BindInstance(_prefabsConfig);
+			Container
+				.BindInterfacesTo<LoadScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesTo<RestartView>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesTo<RestartPresenter>()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesTo<StarParticle>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+			
+			Container.BindInstance(_cardTemplate);
 			
 			Container.BindInstance(_levelsConfig).AsSingle();
 			
 			Container
-				.BindInterfacesTo<LevelSwitcher>()
+				.BindInterfacesTo<LevelManager>()
 				.AsSingle();
 			
 			Container

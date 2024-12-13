@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fe435e896cd475db714ad7e37ea5aee, type: 3}
-  m_Name: CardsBundleConfig
+  m_Name: Bundle 1
   m_EditorClassIdentifier: 
   <Cards>k__BackingField:
-  - <Identifier>k__BackingField: F
-    <Icon>k__BackingField: {fileID: 21300000, guid: 64eb0648ca0d11944a9517d8662508fd, type: 3}
+  - <Identifier>k__BackingField: D
+    <Icon>k__BackingField: {fileID: 7911670913450602933, guid: 5784836ac078125488c82cf56d7773a3, type: 3}
+  - <Identifier>k__BackingField: A
+    <Icon>k__BackingField: {fileID: 4963718625464178563, guid: 5784836ac078125488c82cf56d7773a3, type: 3}
   - <Identifier>k__BackingField: C
-    <Icon>k__BackingField: {fileID: 21300000, guid: c8a69ecdf54ac8e4b873466605de27ff, type: 3}
+    <Icon>k__BackingField: {fileID: 3234300448368640894, guid: 5784836ac078125488c82cf56d7773a3, type: 3}

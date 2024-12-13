@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0396dbfecaf94fb890fbcff6fdd53069, type: 3}
-  m_Name: LevelConfig
+  m_Name: Hard
   m_EditorClassIdentifier: 
+  <Identifier>k__BackingField: 2
   <Bundles>k__BackingField:
-  - {fileID: 11400000, guid: 4d9ac705ad6a56841944657795b9995d, type: 2}
-  - {fileID: 11400000, guid: 2e69147dd57bf204ab95717b24ab6499, type: 2}
+  - {fileID: 11400000, guid: 1a1064d6bdc9c2d43a1b8152f649d844, type: 2}
+  - {fileID: 11400000, guid: b7139d1b8db453240a81a00f958ad81f, type: 2}
+  - {fileID: 11400000, guid: a82184417acabc5499d49c9c1f9a3dd1, type: 2}

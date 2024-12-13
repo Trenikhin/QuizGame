@@ -16,20 +16,28 @@
 	
 	public class QuizBrain: IQuizBrain
 	{
-		[Inject] ILevel _level;
-		
 		Dictionary< string, CardConfig > _cachedGoals = new Dictionary< string, CardConfig>();
 
 		public void GenerateGoals( LevelConfig[] levels )
 		{
 			_cachedGoals.Clear();
-			
 			foreach (var cfg in levels)
 			{
 				CardConfig goal = GetRandom(cfg.Bundles);
+
+				var c = 0;
 				
 				while (_cachedGoals.Values.Contains(goal))
-					goal = GetRandom(_level.Value.Bundles);	
+				{
+					goal = GetRandom(cfg.Bundles);
+
+					if (c >= 100)
+					{
+						Debug.Log("WARNING: Too many goals");
+						break;
+					}
+					c++;
+				}
 				
 				_cachedGoals.Add(cfg.Identifier, goal);
 			}
@@ -38,7 +46,6 @@
 		public CardConfig GetGoal( LevelConfig levelConfig )
 		{
 			var cfg = _cachedGoals[levelConfig.Identifier];
-
 			return cfg;
 		}
 		
