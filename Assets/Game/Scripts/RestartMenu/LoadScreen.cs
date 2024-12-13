@@ -27,8 +27,6 @@
 
 		IEnumerator LoadLevelRoutine()
 		{
-			const float fadeDuration = .5f;
-			
 			_levelManager.Reset();
 			DoFade( 0, 1, _fadeDuration);
 			

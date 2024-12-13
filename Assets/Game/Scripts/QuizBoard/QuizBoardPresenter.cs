@@ -20,16 +20,16 @@
 		
 		public void Initialize()
 		{
-			ShowBoard(_level.Value);
-			_level.OnChanged += ShowBoard;
+			DrawBoard(_level.Value);
+			_level.OnChanged += DrawBoard;
 		}
 		
 		public void Dispose()
 		{
-			_level.OnChanged -= ShowBoard;
+			_level.OnChanged -= DrawBoard;
 		}
 		
-		void ShowBoard(LevelConfig lvlCfg)
+		void DrawBoard(LevelConfig lvlCfg)
 		{
 			bool withAnimation = _levelManager.FirstLevel.Identifier == lvlCfg.Identifier;
 			
