@@ -14,7 +14,8 @@
 	public class StarParticle : MonoBehaviour, IStarParticle
 	{
 		[SerializeField] Image _particle;
-
+		[SerializeField] Transform _moveTarget;
+		
 		public void Show(Vector2 position, Action callback)
 		{
 			var pos = Camera.main.WorldToScreenPoint( position );
@@ -31,6 +32,13 @@
 				.DOScale( 1, 0.3f )
 				.From( 0 )
 				.SetEase( Ease.OutBounce )
+				.WaitForCompletion();
+
+			// Fly
+			_particle.transform.DOScale(0, 0.3f).From(0);
+			
+			yield return _particle.transform
+				.DOMove( _moveTarget.position, 0.3f )
 				.WaitForCompletion();
 			
 			_particle.gameObject.SetActive(false);

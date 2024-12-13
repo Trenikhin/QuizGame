@@ -16,7 +16,6 @@
 		Transform Transform { get; }
 		
 		void SetIcon(Sprite sprite);
-
 		void Shake();
 		void ShowParticles(Action callback);
 	}
@@ -28,12 +27,15 @@
 		[Inject] IStarParticle _particles;
 
 		Tween _shakeTween;
+		int _baseOrder;
 		
 		public event Action OnCardClicked;
 		
 		public Transform Transform => transform;
 
 		public void OnPointerClick(PointerEventData eventData) => OnCardClicked?.Invoke();
+
+		void Start() => _baseOrder = _icon.sortingOrder;
 		
 		public void SetIcon( Sprite sprite )
 		{
@@ -52,7 +54,7 @@
 
 		public void ShowParticles( Action callback )
 		{
-			_icon.sortingOrder = 100;
+			_icon.sortingOrder += 1;
 			
 			// Bounce
 			transform.localScale = Vector3.one;
@@ -68,7 +70,7 @@
 
 			_particles.Show( transform.position, () =>
 			{
-				_icon.sortingOrder = 99;	 
+				_icon.sortingOrder = _baseOrder;	 
 				callback?.Invoke();
 			});
 		}
