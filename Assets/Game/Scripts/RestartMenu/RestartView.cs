@@ -2,8 +2,10 @@
 {
 	using System;
 	using DG.Tweening;
+	using Tweener;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using Zenject;
 
 	public interface IRestartView
 	{
@@ -18,6 +20,8 @@
 		[SerializeField] Button _restartButton;
 		[SerializeField] Image _blackout;
 
+		[Inject] IFadeAnimator _fadeAnimator;
+		
 		public event Action OnRestartClicked;
 		
 		public void Start()
@@ -37,9 +41,7 @@
 		
 		public void ShowBlackout()
 		{
-			DOVirtual
-				.Float(0, 0.66f, 0.3f, (v) => _blackout.color = new Color(_blackout.color.r, _blackout.color.g, _blackout.color.b, v))
-				.SetEase(Ease.Linear);
+			_fadeAnimator.DoFade( _blackout, 0, 0.66f, 0.3f );
 		}
 		
 		void OnClicked() => OnRestartClicked?.Invoke();

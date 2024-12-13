@@ -3,6 +3,7 @@
 	using Core;
 	using QuizBoard;
 	using Scripts.Configs;
+	using Tweener;
 	using Ui;
 	using UnityEngine;
 	using Zenject;
@@ -19,6 +20,10 @@
 		/// </summary>
 		public override void InstallBindings()
 		{
+			Container
+				.BindInterfacesTo<FadeAnimator>()
+				.AsSingle();
+			
 			Container.BindInstance(_spriteRenderer);
 			Container.BindInstance(_cardHolder);
 			
@@ -72,7 +77,7 @@
 			
 			// Bind card factory
 			Container
-				.BindFactory< CardConfig, IQuizCardView, QuizCardView.Factory>()
+				.BindFactory< CardConfig, Vector3, IQuizCardView, QuizCardView.Factory>()
 				.FromFactory< CardFactory >();
 			
 			Container

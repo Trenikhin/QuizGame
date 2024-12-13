@@ -17,7 +17,7 @@
 				.BindInterfacesAndSelfTo<QuizCardView>()
 				.FromComponentInHierarchy()
 				.AsSingle();
-
+			
 			Container.BindInstance(_cfg);
 		}
 	}

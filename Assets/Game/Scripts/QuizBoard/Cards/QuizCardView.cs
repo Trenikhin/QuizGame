@@ -27,7 +27,6 @@
 
 		Tween _shakeTween;
 		int _baseOrder;
-		bool _isInteractable;
 		
 		public event Action OnCardClicked;
 		
@@ -80,6 +79,6 @@
 			});
 		}
 
-		public class Factory : PlaceholderFactory<CardConfig ,IQuizCardView> {}
+		public class Factory : PlaceholderFactory<CardConfig, Vector3, IQuizCardView> {}
 	}
 }

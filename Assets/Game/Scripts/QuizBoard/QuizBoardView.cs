@@ -3,12 +3,13 @@
 	using DG.Tweening;
 	using Scripts.Configs;
 	using TMPro;
+	using Tweener;
 	using UnityEngine;
 	using Zenject;
 
 	public interface IQuizBoardView
 	{
-		IQuizCardView CreateCard( CardConfig cfg, bool hasAnimation );
+		IQuizCardView CreateCard( CardConfig cfg, Vector3 pos, bool hasAnimation );
 
 		void SetGoal(string goal, bool hasAnimation);
 	}
@@ -17,6 +18,7 @@
 	{
 		[SerializeField] TextMeshProUGUI _goalTxt;
 		
+		[Inject] IFadeAnimator _fadeAnimator;
 		[Inject] QuizCardView.Factory _factory;
 
 		Tween _showCardTween;
@@ -28,9 +30,9 @@
 			_showTextTween?.Kill();
 		}
 		
-		public IQuizCardView CreateCard( CardConfig cfg, bool hasAnimation )
+		public IQuizCardView CreateCard( CardConfig cfg, Vector3 pos, bool hasAnimation )
 		{
-			var card = _factory.Create(cfg);
+			var card = _factory.Create(cfg, pos);
 			
 			if (hasAnimation)
 			{
@@ -49,12 +51,8 @@
 
 			if (!hasAnimation)
 				return;
-			
-			_showTextTween = DOVirtual.Float(0, 1, 0.5f, (v) =>
-				{
-					_goalTxt.color = new Color(_goalTxt.color.r, _goalTxt.color.g, _goalTxt.color.b, v);
-				})
-				.SetEase(Ease.Linear);
+
+			_showTextTween = _fadeAnimator.DoFade( _goalTxt, 0, 1, 0.5f );
 		}
 	}
 }
