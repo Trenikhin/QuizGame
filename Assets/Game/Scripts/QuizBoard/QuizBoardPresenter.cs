@@ -22,11 +22,13 @@
 		{
 			DrawBoard(_level.Value);
 			_level.OnChanged += DrawBoard;
+			_level.LastLevelCompleted += ClearBoard;
 		}
 		
 		public void Dispose()
 		{
 			_level.OnChanged -= DrawBoard;
+			_level.LastLevelCompleted -= ClearBoard;
 		}
 		
 		void DrawBoard(LevelConfig lvlCfg)
@@ -61,6 +63,7 @@
 
 		void ClearBoard()
 		{
+			_view.SetGoal("", false);
 			foreach (var c in _cards)
 				Object.Destroy( c.Transform.gameObject );
 			_cards.Clear();

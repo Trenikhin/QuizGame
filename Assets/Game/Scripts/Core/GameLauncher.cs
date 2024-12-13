@@ -6,7 +6,7 @@
 
 	public interface IGameLauncher
 	{
-		void Reset();
+		void Launch();
 	}
 	
 	public class GameLauncher : IInitializable, IGameLauncher
@@ -15,9 +15,9 @@
 		[Inject] IQuizBrain _brain;
 		[Inject] LevelsConfig _levels;
 		
-		public void Initialize() => Reset();
+		public void Initialize() => Launch();
 		
-		public void Reset()
+		public void Launch()
 		{
 			_brain.GenerateGoals( _levels.Levels.ToArray() );
 			_level.Reset();
