@@ -5,6 +5,7 @@
 	using DG.Tweening;
 	using Scripts.Configs;
 	using UnityEngine;
+	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 	using Zenject;
 
@@ -20,37 +21,26 @@
 		void ShowParticles(Action callback);
 	}
 	
-	public class QuizCardView : MonoBehaviour, IQuizCardView
+	public class QuizCardView : MonoBehaviour, IQuizCardView, IPointerClickHandler
 	{
-		[SerializeField] Image _icon;
-		[SerializeField] Button _cardButton;
+		[SerializeField] SpriteRenderer _icon;
 
 		[Inject] IStarParticle _particles;
 		
 		public event Action OnCardClicked;
 		
 		public Transform Transform => transform;
+
+		public void OnPointerClick(PointerEventData eventData) => OnCardClicked?.Invoke();
 		
 		public void SetIcon( Sprite sprite )
 		{
 			_icon.sprite = sprite;
-			_icon.SetNativeSize();
-			_icon.rectTransform.sizeDelta *= 0.25f;
-		}
-
-		public void Start()
-		{
-			_cardButton.onClick.AddListener(OnClicked);
-		}
-
-		void OnDestroy()
-		{
-			_cardButton.onClick.RemoveListener(OnClicked);
 		}
 
 		public void Shake()
 		{
-			Vector3 strength = transform.localScale.x * 15 * Vector3.right;
+			Vector3 strength = transform.localScale.x * 0.2f * Vector3.right;
 			
 			transform
 				.DOShakePosition( 0.1f, strength, 30 )
@@ -59,6 +49,8 @@
 
 		public void ShowParticles( Action callback )
 		{
+			_icon.sortingOrder = 100;
+			
 			// Bounce
 			transform.localScale = Vector3.one;
 			Sequence bounceSequence = DOTween.Sequence();
@@ -71,10 +63,12 @@
 			
 			bounceSequence.Play();
 
-			_particles.Show( transform.position, callback );
+			_particles.Show( transform.position, () =>
+			{
+				_icon.sortingOrder = 99;	 
+				callback?.Invoke();
+			});
 		}
-		
-		void OnClicked() => OnCardClicked?.Invoke();
 		
 		public class Factory : PlaceholderFactory<CardConfig ,IQuizCardView> {}
 	}

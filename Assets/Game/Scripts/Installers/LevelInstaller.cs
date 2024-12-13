@@ -15,6 +15,11 @@
 		public override void InstallBindings()
 		{
 			Container
+				.BindInterfacesTo<GridPlacer>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+			
+			Container
 				.BindInterfacesTo<LoadScreen>()
 				.FromComponentInHierarchy()
 				.AsSingle();

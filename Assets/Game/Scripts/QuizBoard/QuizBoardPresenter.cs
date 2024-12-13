@@ -2,21 +2,22 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using Core;
+	using Scripts._SandBox;
 	using Scripts.Configs;
 	using UnityEngine;
 	using Zenject;
+	using Object = UnityEngine.Object;
 
 	public class QuizBoardPresenter : IInitializable, IDisposable
 	{
 		[Inject] ILevel _level;
 		[Inject] IQuizBoardView _view;
+		[Inject] IGridPlacer _gridPlacer;
 		[Inject] IQuizBrain _brain;
 		[Inject] ILevelManager _levelManager;
 		
 		List<IQuizCardView> _cards = new List<IQuizCardView>();
-		List<QuizCardBundleView> _bundles = new List<QuizCardBundleView>();
 		
 		public void Initialize()
 		{
@@ -35,35 +36,37 @@
 			
 			ClearBoard();
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
+
+			Transform[,] cards = new Transform[lvlCfg.Bundles.Length, lvlCfg.Bundles[0].Cards.Length];
 			
-			foreach (var bundleCfg in lvlCfg.Bundles)
+			for (int i = 0; i < lvlCfg.Bundles.Length; i++)
 			{
-				var bundleView = _view.GetBundle();
-				_bundles.Add( bundleView );
-				
-				foreach (var cardCfg in bundleCfg.Cards)
+				for (int j = 0; j < lvlCfg.Bundles[i].Cards.Length; j++)
 				{
-					CreateCard(cardCfg, bundleView, withAnimation );
+					var cardCfg = lvlCfg.Bundles[i].Cards[j];
+					var card = CreateCard(cardCfg, withAnimation );
+					
+					cards[i, j] = card.Transform;
 				}
 			}
+			
+			_gridPlacer.Place( cards );
 		}
 		
-		void CreateCard(CardConfig cardCfg, QuizCardBundleView bundleView, bool animate)
+		IQuizCardView CreateCard(CardConfig cardCfg, bool animate)
 		{
 			var cardView = _view.CreateCard(cardCfg, animate);
 			cardView.SetIcon( cardCfg.Icon );
-			cardView.Transform.SetParent(bundleView.transform);
 			_cards.Add( cardView );
+
+			return cardView;
 		}
 
 		void ClearBoard()
 		{
 			foreach (var c in _cards)
-				GameObject.Destroy( c.Transform.gameObject );
+				Object.Destroy( c.Transform.gameObject );
 			_cards.Clear();
-			foreach (var b in _bundles)
-				GameObject.Destroy( b.gameObject );
-			_bundles.Clear();
 		}
 	}
 }

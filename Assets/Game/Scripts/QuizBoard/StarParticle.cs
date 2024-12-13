@@ -17,7 +17,9 @@
 
 		public void Show(Vector2 position, Action callback)
 		{
-			StartCoroutine( ShowParticlesRoutine( position, callback ) );
+			var pos = Camera.main.WorldToScreenPoint( position );
+			
+			StartCoroutine( ShowParticlesRoutine( pos, callback ) );
 		}
 		
 		IEnumerator ShowParticlesRoutine( Vector2 position, Action callback )

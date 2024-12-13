@@ -9,7 +9,6 @@
 
 	public interface IQuizBoardView
 	{
-		QuizCardBundleView GetBundle();
 		IQuizCardView CreateCard( CardConfig cfg, bool hasAnimation );
 
 		void SetGoal(string goal, bool hasAnimation);
@@ -18,8 +17,6 @@
 	public class QuizBoardView : MonoBehaviour, IQuizBoardView
 	{
 		[SerializeField] TextMeshProUGUI _goalTxt;
-		[SerializeField] Transform _cardContainer;
-		[SerializeField] QuizCardBundleView _cardBundleTemplate;
 		
 		[Inject] QuizCardView.Factory _factory;
 
@@ -31,8 +28,6 @@
 			_showCardTween?.Kill();
 			_showTextTween?.Kill();
 		}
-		
-		public QuizCardBundleView GetBundle() => Instantiate(_cardBundleTemplate, _cardContainer);
 		
 		public IQuizCardView CreateCard( CardConfig cfg, bool hasAnimation )
 		{
