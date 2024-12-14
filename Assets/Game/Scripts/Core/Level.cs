@@ -1,8 +1,7 @@
 ﻿namespace Game.Core
 { 
 	using System;
-	using Scripts.Configs;
-	using UnityEngine;
+	using Configs;
 	using Zenject;
 
 	public interface ILevel

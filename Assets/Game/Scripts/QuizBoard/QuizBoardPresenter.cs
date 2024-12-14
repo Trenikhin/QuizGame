@@ -3,10 +3,9 @@
 	using System;
 	using System.Collections.Generic;
 	using Core;
-	using Scripts.Configs;
+	using Configs;
 	using UnityEngine;
 	using Zenject;
-	using Object = UnityEngine.Object;
 
 	public class QuizBoardPresenter : IInitializable, IDisposable
 	{
@@ -64,8 +63,7 @@
 			_view.SetGoal("", false);
 			
 			// Clear Cards
-			foreach (var c in _cards)
-				c.Dispose();
+			_cards.ForEach( c => c.Dispose() );
 			_cards.Clear();
 		}
 	}

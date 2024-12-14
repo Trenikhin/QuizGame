@@ -1,7 +1,6 @@
 ﻿namespace Game.Core
 {
-	using QuizBoard;
-	using Scripts.Configs;
+	using Configs;
 	using Zenject;
 
 	public interface IPickHelper

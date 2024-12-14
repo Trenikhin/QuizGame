@@ -2,7 +2,6 @@
 {
 	using System;
 	using Core;
-	using Scripts.Configs;
 	using Zenject;
 
 	public class RestartPresenter : IInitializable, IDisposable

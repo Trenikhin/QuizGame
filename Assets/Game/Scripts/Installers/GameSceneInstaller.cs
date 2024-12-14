@@ -2,13 +2,13 @@
 {
 	using Core;
 	using QuizBoard;
-	using Scripts.Configs;
+	using Configs;
 	using Animations;
 	using Ui;
 	using UnityEngine;
 	using Zenject;
 
-	public class LevelInstaller : MonoInstaller
+	public class GameSceneInstaller : MonoInstaller
 	{
 		[SerializeField] QuizCardView _cardTemplate;
 		[SerializeField] LevelsConfig _levels;
@@ -20,36 +20,57 @@
 		/// </summary>
 		public override void InstallBindings()
 		{
+			BindCore();
+			BindQuizBoard();
+			BindTweens();
+			BindUi();
+		}
+
+		void BindTweens()
+		{
 			Container
 				.BindInterfacesTo<FadeAnimator>()
 				.AsSingle();
-			
-			Container.BindInstance(_spriteRenderer);
-			
-			Container
-				.BindInterfacesTo<Coords>()
-				.AsSingle();
-			
-			Container
-				.BindInterfacesTo<LoadScreen>()
-				.FromComponentInHierarchy()
-				.AsSingle();
-			
-			Container
-				.BindInterfacesTo<RestartView>()
-				.FromComponentInHierarchy()
-				.AsSingle();
-			
-			Container
-				.BindInterfacesTo<RestartPresenter>()
-				.AsSingle();
-			
+
 			Container
 				.BindInterfacesTo<StarParticle>()
 				.FromComponentInHierarchy()
 				.AsSingle();
-			
+		}
+
+		void BindQuizBoard()
+		{
 			Container.BindInstance(_cardTemplate);
+			Container.BindInstance(_spriteRenderer);
+			
+			Container.BindFactory<CardConfig, Vector3, QuizCardPresenter, QuizCardPresenter.Factory>()
+				.FromPoolableMemoryPool( pool => pool
+					.WithInitialSize(10)
+					.FromSubContainerResolve()
+					.ByNewContextPrefab( _cardTemplate )
+					.WithGameObjectName( "Card" )
+					.UnderTransform( _cardHolder )
+				);
+			
+			Container
+				.BindInterfacesTo<QuizBoardPresenter>()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesTo<QuizBoardView>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesTo<Coords>()
+				.AsSingle();
+		}
+
+		void BindCore()
+		{
+			Container
+				.BindInterfacesTo<QuizBrain>()
+				.AsSingle();
 			
 			Container.BindInstance(_levels).AsSingle();
 			
@@ -62,29 +83,24 @@
 				.AsSingle();
 			
 			Container
-				.BindInterfacesTo<QuizBoardPresenter>()
+				.BindInterfacesTo<Level>()
+				.AsSingle();
+		}
+
+		void BindUi()
+		{
+			Container
+				.BindInterfacesTo<RestartPresenter>()
 				.AsSingle();
 			
 			Container
-				.BindInterfacesTo<QuizBoardView>()
+				.BindInterfacesTo<RestartView>()
 				.FromComponentInHierarchy()
 				.AsSingle();
 			
 			Container
-				.BindInterfacesTo<QuizBrain>()
-				.AsSingle();
-			
-			Container.BindFactory<CardConfig, Vector3, QuizCardPresenter, QuizCardPresenter.Factory>()
-				.FromPoolableMemoryPool( pool => pool
-					.WithInitialSize(10)
-					.FromSubContainerResolve()
-					.ByNewContextPrefab( _cardTemplate )
-					.WithGameObjectName( "Card" )
-					.UnderTransform( _cardHolder )
-				);
-			
-			Container
-				.BindInterfacesTo<Level>()
+				.BindInterfacesTo<LoadScreen>()
+				.FromComponentInHierarchy()
 				.AsSingle();
 		}
 	}

@@ -3,7 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Scripts.Configs;
+	using Configs;
 	using UnityEngine;
 
 	public interface IQuizBrain

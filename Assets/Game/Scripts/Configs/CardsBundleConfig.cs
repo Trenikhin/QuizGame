@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.Configs
+﻿namespace Game.Configs
 {
 	using UnityEngine;
 

@@ -3,7 +3,7 @@
 	using System;
 	using Zenject;
 	using Core;
-	using Scripts.Configs;
+	using Configs;
 	using UnityEngine;
 
 	public class QuizCardPresenter : IInitializable, IDisposable, IPoolable<CardConfig, Vector3, IMemoryPool>

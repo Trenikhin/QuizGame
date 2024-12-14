@@ -1,6 +1,6 @@
 ﻿namespace Game.Core
 {
-	using Scripts.Configs;
+	using Configs;
 	using Zenject;
 
 	public interface IGameLauncher
