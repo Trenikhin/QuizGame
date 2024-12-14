@@ -1,4 +1,4 @@
-namespace Game.Tweener
+namespace Game.Animations
 {
 	using DG.Tweening;
 	using TMPro;

@@ -3,7 +3,7 @@
 	using Core;
 	using QuizBoard;
 	using Scripts.Configs;
-	using Tweener;
+	using Animations;
 	using Ui;
 	using UnityEngine;
 	using Zenject;

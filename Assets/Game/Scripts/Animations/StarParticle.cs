@@ -1,4 +1,4 @@
-﻿namespace Game.QuizBoard
+﻿namespace Game.Animations
 {
 	using System;
 	using System.Collections;

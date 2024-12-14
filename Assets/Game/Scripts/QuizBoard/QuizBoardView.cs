@@ -1,9 +1,8 @@
 ﻿namespace Game.QuizBoard
 {
 	using DG.Tweening;
-	using Scripts.Configs;
 	using TMPro;
-	using Tweener;
+	using Animations;
 	using UnityEngine;
 	using Zenject;
 

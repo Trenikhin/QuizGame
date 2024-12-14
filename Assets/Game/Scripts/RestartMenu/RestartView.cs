@@ -1,8 +1,7 @@
 ﻿namespace Game.Ui
 {
 	using System;
-	using DG.Tweening;
-	using Tweener;
+	using Animations;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Zenject;
