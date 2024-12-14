@@ -2,7 +2,7 @@
 {
 	using System;
 	using Zenject;
-	using Game.Core;
+	using Core;
 	using Scripts.Configs;
 	using UnityEngine;
 
@@ -34,14 +34,16 @@
 			_spawned = true;
 			
 			if (_levels.FirstLevel.Identifier == _level.Value.Identifier)
-				_view.Animate();
+				_view.Appear();
 			
-			_view.SetActive( true );
 			_pool = pool;
 			_cfg = card;
-			_view.Transform.position = pos;
-			_view.OnCardClicked += OnCardClicked;
+			
+			_view.SetActive( true );
+			_view.SetPos( pos );
 			_view.SetIcon( _cfg.Icon );
+			
+			_view.OnCardClicked += OnCardClicked;
 		}
 		
 		public void OnDespawned()

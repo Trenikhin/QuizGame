@@ -10,12 +10,13 @@
 	public interface IQuizCardView
 	{
 		event Action OnCardClicked;
-
-		Transform Transform { get; }
-
-		void Animate();
+		
 		void SetActive(bool active);
 		void SetIcon(Sprite sprite);
+		void SetPos(Vector3 pos);
+		
+		// Animations
+		void Appear();
 		void Shake();
 		void ShowParticles(Action callback);
 	}
@@ -32,8 +33,6 @@
 		Tween _showCardTween;
 
 		public event Action OnCardClicked;
-		
-		public Transform Transform => transform;
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
@@ -44,24 +43,24 @@
 		
 		public void SetActive(bool active) => gameObject.SetActive(active);
 
-		public void Animate()
-		{
-			_showCardTween = transform
-				.DOScale( 1, 0.22f )
-				.SetEase(Ease.OutBounce)
-				.From(0);
-		}
-		
-		public void SetChild(Transform parent)
-		{
-			transform.parent = parent;
-		}
-
 		public void SetIcon( Sprite sprite )
 		{
 			_icon.sprite = sprite;
 		}
 
+		public void SetPos(Vector3 pos)
+		{
+			transform.position = pos;
+		}
+
+		public void Appear()
+		{
+			_showCardTween = transform
+				.DOScale( 1, 0.35f )
+				.SetEase(Ease.OutBounce)
+				.From(0);
+		}
+		
 		public void Shake()
 		{
 			Vector3 strength = transform.localScale.x * 0.2f * Vector3.right;
@@ -77,7 +76,6 @@
 			_icon.sortingOrder += 1;
 			_collider.enabled = false;
 			
-			// Bounce
 			transform.localScale = Vector3.one;
 			Sequence bounceSequence = DOTween.Sequence();
 			
