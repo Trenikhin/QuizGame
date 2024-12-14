@@ -1,6 +1,5 @@
 ﻿namespace Game.Core
 {
-	using QuizBoard;
 	using Scripts.Configs;
 	using Zenject;
 

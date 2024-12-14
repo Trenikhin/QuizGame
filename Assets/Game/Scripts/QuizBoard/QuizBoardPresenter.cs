@@ -42,8 +42,7 @@
 			bool withAnimation = _levels.FirstLevel.Identifier == lvlCfg.Identifier;
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
 
-			// Create Cards
-			
+			// Create Card
 			var board = _brain.GetBoard(lvlCfg);
 			var width = board.GetLength(0);
 			var height = board.GetLength(1);
