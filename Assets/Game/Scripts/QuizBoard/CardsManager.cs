@@ -6,13 +6,13 @@
 	using UnityEngine;
 	using Zenject;
 
-	public interface ICardManager
+	public interface ICardsManager
 	{
 		void Spawn(LevelConfig lvlCfg);
 		void Despawn();
 	}
 	
-	public class CardManager : ICardManager
+	public class CardsManager : ICardsManager
 	{
 		[Inject] ICoords  _coords;
 		[Inject] IQuizBrain _brain;

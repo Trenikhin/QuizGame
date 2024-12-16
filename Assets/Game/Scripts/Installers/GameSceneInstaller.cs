@@ -57,7 +57,7 @@
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<CardManager>()
+				.BindInterfacesTo<CardsManager>()
 				.AsSingle();
 			
 			Container

@@ -12,7 +12,7 @@
 		[Inject] IQuizBoardView _view;
 		[Inject] IQuizBrain _brain;
 		
-		[Inject] ICardManager _cardManager;
+		[Inject] ICardsManager _cardsManager;
 		[Inject] ILevel _level;
 		[Inject] LevelsConfig _levels;
 		
@@ -32,20 +32,20 @@
 		void DrawLevel(LevelConfig lvlCfg)
 		{
 			// Clear Board
-			_cardManager.Despawn();
+			_cardsManager.Despawn();
 			
 			// Set Text
 			bool withAnimation = _levels.FirstLevel.Identifier == lvlCfg.Identifier;
 			_view.SetGoal( $"Find {_brain.GetGoal(lvlCfg).Identifier}", withAnimation );
 
 			// Create Cards
-			_cardManager.Spawn( lvlCfg );
+			_cardsManager.Spawn( lvlCfg );
 		}
 
 		void ClearLevel()
 		{
 			_view.SetGoal("", false);
-			_cardManager.Despawn();;
+			_cardsManager.Despawn();;
 		}
 	}
 }
