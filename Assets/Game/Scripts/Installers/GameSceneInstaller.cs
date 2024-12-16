@@ -55,6 +55,10 @@
 			Container
 				.BindInterfacesTo<QuizBoardPresenter>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<CardManager>()
+				.AsSingle();
 			
 			Container
 				.BindInterfacesTo<QuizBoardView>()
